@@ -12,6 +12,8 @@ import Timeline from "../components/Homepages/Timeline";
 import Ending from "../components/Homepages/Ending";
 import { get4Items, getItems } from "../API/guestAPI";
 import UserContactModal from "../components/Homepages/UserContactModal";
+import LoadingAnimation from "../assets/loading.json";
+import Lottie from "lottie-react";
 
 export default function Homepage() {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
@@ -27,7 +29,13 @@ export default function Homepage() {
   });
 
   if (itemQuery.isLoading || itemQuery2.isLoading)
-    return <div className="h-screen flex justify-center items-center"><h1 className="text-2xl font-bold">loading ... wait a second </h1></div>;
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <div className="w-48 h-48 lg:w-64 lg:h-64">
+          <Lottie animationData={LoadingAnimation} loop />
+        </div>
+      </div>
+    );
   if (itemQuery.isError || itemQuery2.isError)
     return (
       <div className="h-screen flex justify-center items-center">
