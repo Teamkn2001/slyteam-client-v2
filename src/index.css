@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* carousel-styles.css */
 .custom-dot-list {
   bottom: 20px !important; /* Move dots higher */

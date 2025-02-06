@@ -4,6 +4,20 @@ import { toast } from "react-toastify";
 import { Item } from "../../types/items";
 import { bookItem } from "../../API/guestAPI";
 
+const formatDate = (date: Date): string => {
+  return date.toISOString().split("T")[0];
+};
+
+const getMaxDate = (): string => {
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 7);
+  return formatDate(maxDate);
+};
+
+const getTodayDate = (): string => {
+  return formatDate(new Date());
+};
+
 export default function UserBookingForm({
   selectedItem,
   setIsSendingEmail,
@@ -28,11 +42,36 @@ export default function UserBookingForm({
   });
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDate = e.target.value ? new Date(e.target.value) : null;
+    //  validation 
+    if (selectedDate) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const maxDate = new Date();
+      maxDate.setDate(maxDate.getDate() + 7);
+      maxDate.setHours(23, 59, 59, 999);
+
+      if (selectedDate < today) {
+        setErrors((prev) => ({
+          ...prev,
+          bookingDate: "Cannot select a past date",
+        }));
+        return;
+      }
+      if (selectedDate > maxDate) {
+        setErrors((prev) => ({
+          ...prev,
+          bookingDate: "Cannot select a date more than 7 days ahead",
+        }));
+        return;
+      }
+    }
+
     setBookingForm((prev) => ({
       ...prev,
-      bookingDate: e.target.value ? new Date(e.target.value) : null,
+      bookingDate: selectedDate,
     }));
-    // Clear error when user types
     setErrors((prev) => ({ ...prev, bookingDate: "" }));
   };
 
@@ -69,8 +108,21 @@ export default function UserBookingForm({
     }
 
     // Validate date
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const maxDate = new Date();
+    maxDate.setDate(maxDate.getDate() + 7);
+    maxDate.setHours(23, 59, 59, 999);
+
     if (!bookingForm.bookingDate) {
       newErrors.bookingDate = "Viewing date is required";
+      isValid = false;
+    } else if (bookingForm.bookingDate < today) {
+      newErrors.bookingDate = "Cannot select a past date";
+      isValid = false;
+    } else if (bookingForm.bookingDate > maxDate) {
+      newErrors.bookingDate = "Cannot select a date more than 7 days ahead";
       isValid = false;
     }
 
@@ -118,7 +170,6 @@ export default function UserBookingForm({
           message: null,
           bookingDate: null,
         });
-
       } catch (error: any) {
         return toast.error(error.response.data.message);
       } finally {
@@ -141,6 +192,8 @@ export default function UserBookingForm({
             </label>
             <input
               type="date"
+              min={getTodayDate()}
+              max={getMaxDate()}
               value={
                 bookingForm.bookingDate
                   ? bookingForm.bookingDate.toISOString().split("T")[0]
@@ -210,7 +263,7 @@ export default function UserBookingForm({
                 type="text"
                 placeholder="phone number"
                 className={`w-full px-4 py-2.5 border ${
-                  errors.email ? "border-red-500" : "border-gray-300"
+                  errors.phone ? "border-red-500" : "border-gray-300"
                 } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200 bg-gray-50 hover:bg-gray-100 placeholder-gray-400`}
               />
               {errors.phone && (

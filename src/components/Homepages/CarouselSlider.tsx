@@ -26,14 +26,14 @@ export default function CarouselSlider({
     },
   };
 
-  const [isSliding, setIsSliding] = useState<boolean>(false)
+  const [isSliding, setIsSliding] = useState<boolean>(false);
 
   return (
     <div className="w-full max-w-[1200px] mt-2 px-4">
       <Carousel
         responsive={responsive}
         autoPlay={true}
-        autoPlaySpeed={4500}
+        autoPlaySpeed={4000}
         infinite={true}
         showDots={true}
         arrows={true}
@@ -55,16 +55,37 @@ export default function CarouselSlider({
             }}
             className="w-full h-[300px] md:h-[400px] lg:h-[500px] hover:cursor-pointer relative"
           >
-            <div className={`hidden lg:w-[60%] lg:flex flex-col absolute top-10 gap-4 justify-center ml-10 rounded-lg `}>
-              <h1 className={`text-6xl font-semibold text-white [text-shadow:_2px_2px_2px_rgb(0_0_0_/_90%)] ${isSliding ? 'opacity-0' : 'animate__animated animate__fadeInUp'}`}>
+            <div
+              className={`hidden lg:w-[60%] lg:flex flex-col absolute top-10 gap-4 justify-center ml-10 rounded-lg `}
+            >
+              <h1
+                className={`text-6xl font-semibold text-white [text-shadow:_2px_2px_2px_rgb(0_0_0_/_90%)] ${
+                  isSliding
+                    ? "opacity-0"
+                    : "animate__animated animate__fadeInUp"
+                }`}
+              >
                 {item.name}
               </h1>
-              <p className={`text-2xl text-white font-medium [text-shadow:_2px_2px_2px_rgb(0_0_0_/_90%)]  ${isSliding ? 'opacity-0' : 'animate__animated animate__fadeInUp'}`}>
+              <p
+                className={`text-2xl text-white font-medium [text-shadow:_2px_2px_2px_rgb(0_0_0_/_90%)]  ${
+                  isSliding
+                    ? "opacity-0"
+                    : "animate__animated animate__fadeInUp"
+                }`}
+              >
                 {item.description}
               </p>
             </div>
 
-            <div className={`absolute bottom-4 right-4 lg:bottom-8 lg:right-8 text-white -rotate-30 ${isSliding ? 'opacity-0' : 'animate__animated animate__fadeInUp'}`}><Pointer className="w-[35px] h-[35px] lg:w-[45px] lg:h-[45px]"/></div>
+            <div
+              className={`absolute bottom-4 right-4 lg:bottom-8 lg:right-8 text-white ${
+                isSliding ? "opacity-0" : "animate__animated animate__fadeInBottomRight"
+              }`}
+            >
+              <Pointer className="w-[35px] h-[35px] lg:w-[50px] lg:h-[50px] -rotate-45" />
+            </div>
+
             <img
               src={item.image}
               alt="property image"
