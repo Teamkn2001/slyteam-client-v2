@@ -27,7 +27,7 @@ export default function Homepage() {
   });
 
   if (itemQuery.isLoading || itemQuery2.isLoading)
-    return <div className="h-screen"><h1 className="text-2xl font-bold">loading ... hmmm</h1></div>;
+    return <div className="h-screen flex justify-center items-center"><h1 className="text-2xl font-bold">loading ... wait a second </h1></div>;
   if (itemQuery.isError || itemQuery2.isError)
     return (
       <div className="h-screen flex justify-center items-center">

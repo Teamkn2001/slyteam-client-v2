@@ -115,8 +115,8 @@ export default function Awards() {
 
       <div className="hidden lg:block h-[14rem] w-full mb-[2rem] ">
         <div className="w-full h-full [&_h2]:text-2xl [&_h2]:font-bold [&_p]:text-lg  flex flex-col items-center justify-end  gap-6">
-          <div className="w-[40rem] flex gap-8 text-center [&_div]:bg-[#8F8061]/20 [&_div]:rounded-sm [&_div]:hover:bg-[#8F8061]/35 [&_div]:hover:scale-105 [&_div]:duration-300">
-            <div className="w-1/3 ">
+          <div className="w-[40rem] flex gap-8 text-center [&_div]:bg-[#8F8061]/20 [&_div]:rounded-sm cursor-default">
+            <div className="w-1/3 hover:bg-[#8F8061]/35 hover:scale-105 duration-300">
               <h2>
                 <CountUp
                   from={0}
@@ -130,7 +130,7 @@ export default function Awards() {
               </h2>
               <p> Prestigious Real Estate Projects</p>
             </div>
-            <div className="w-1/3">
+            <div className="w-1/3 hover:bg-[#8F8061]/35 hover:scale-105 duration-300">
               <h2>
                 <CountUp
                   from={0}
@@ -144,7 +144,7 @@ export default function Awards() {
               </h2>
               <p> Happy Clients</p>
             </div>
-            <div className="w-1/3 ">
+            <div className="w-1/3 hover:bg-[#8F8061]/35 hover:scale-105 duration-300">
               <h2>
                 $
                 <CountUp
