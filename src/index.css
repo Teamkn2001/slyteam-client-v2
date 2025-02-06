@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* carousel-styles.css */
+.custom-dot-list {
+  bottom: 20px !important; /* Move dots higher */
+}
+
+.custom-dot-list li {
+  margin: 0 3px; /* Increased gap between dots */
+}
+
+.custom-dot-list li button {
+  background: rgba(255, 255, 255, 0.5); /* inactive dot color */
+}
+
+.custom-dot-list li.react-multi-carousel-dot--active button {
+  background: white; /* active dot color */
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
